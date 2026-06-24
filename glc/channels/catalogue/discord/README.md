@@ -29,11 +29,21 @@ here — it lives in `glc.channels.envelope`.
 
 ### Verification
 
-Run from the repo root (`C:\Users\akenn\GitHub\glc_v1_g2_discord`):
+Run from the repo root:
 
 ```powershell
-uv run ruff check glc/channels/catalogue/discord/  # All checks passed!
-uv run mypy  glc/channels/catalogue/discord/       # no issues found
+uv run ruff check glc/channels/catalogue/discord/
+uv run mypy  glc/channels/catalogue/discord/
+```
+
+Captured output:
+
+```text
+PS > uv run ruff check glc/channels/catalogue/discord/
+All checks passed!
+PS > uv run mypy  glc/channels/catalogue/discord/
+Success: no issues found in 3 source files
+PS >
 ```
 
 > **Note:** `uv run pytest tests/channels/test_discord.py` does **not** pass yet.
