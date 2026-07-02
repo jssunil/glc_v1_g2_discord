@@ -28,10 +28,10 @@ import pytest
 from dotenv import load_dotenv
 
 from glc.channels.catalogue.discord.adapter import Adapter
-from glc.channels.catalogue.discord.run_discord_bridge import RealDiscordClient
+from glc.channels.catalogue.discord.tests.run_discord_bridge import RealDiscordClient
 from glc.channels.envelope import ChannelReply
 
-load_dotenv(Path(__file__).resolve().parents[6] / ".env")
+load_dotenv(Path(__file__).resolve().parents[5] / ".env")
 
 BOT_TOKEN: str = os.environ.get("DISCORD_BOT_TOKEN", "")
 CHANNEL_ID: str = os.environ.get("DISCORD_TEST_CHANNEL_ID", "")
