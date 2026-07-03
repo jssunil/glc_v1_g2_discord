@@ -21,11 +21,18 @@ It translates real-time Discord messaging events (WebSockets and REST APIs) to a
 
 To verify the implementation locally, run the following quality gates from the repository root:
 
-### Automated Tests
+### Automated Mock Contract Tests
 Run the 7-test suite to verify the adapter's structural and behavioral contracts (gated by mock injection):
 ```bash
 uv run pytest tests/channels/test_discord.py -v
 ```
+
+### Live Integration Tests
+To run live integration tests against the real Discord API (these auto-skip if credentials are not configured in your `.env`):
+```bash
+uv run pytest glc/channels/catalogue/discord/tests/test_live_discord.py -m requires_live_api -v
+```
+
 
 ### Linter Compliance
 Verify style rules and formatting guidelines are met:
@@ -46,11 +53,15 @@ uv run mypy glc/channels/catalogue/discord/
 To test and run the adapter against the real Discord API end-to-end:
 
 ### Step A: Configure the Environment
-Create a `.env` file at the root of the repository and set your bot credentials:
-```env
-DISCORD_BOT_TOKEN=your_real_discord_bot_token_here
-DISCORD_TEST_CHANNEL_ID=your_discord_channel_id_here
+Copy the environment template `glc/channels/catalogue/discord/env.example` to `.env` at the repository root and fill in your credentials:
+```bash
+cp glc/channels/catalogue/discord/env.example .env
 ```
+
+Your `.env` should define:
+* `DISCORD_BOT_TOKEN`: The bot token from the Discord Developer Portal.
+* `DISCORD_TEST_CHANNEL_ID`: A channel ID where the bot has send/read permissions.
+* `DISCORD_TEST_USER_ID` (optional): A user ID used to verify mention resolution.
 
 ### Step B: Start the GLC Gateway Server
 Start the central GLC Gateway server on port `8111`:
